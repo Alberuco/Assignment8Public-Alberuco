@@ -5,7 +5,6 @@
 
 require("dotenv").config();
 const express  = require("express");
-const cors     = require("cors");
 const mongoose = require("mongoose");
 const bcrypt   = require("bcryptjs");
 const jwt      = require("jsonwebtoken");
@@ -14,7 +13,16 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware — mount BEFORE any route.
-app.use(cors());
+// server.js — add to the top middleware section
+const cors = require("cors");
+app.use(cors({
+  origin: [
+    "http://localhost:5173",                       // dev
+    "https://your-platescout.vercel.app",          // <-- your Vercel URL (after Step D)
+    /\.vercel\.app$/,                              // optional: preview branches
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 // Connect Mongoose to MongoDB Atlas.
@@ -215,6 +223,15 @@ app.post("/api/logout", (req, res) => {
 
 
   return res.status(200).json({ message: "Logged out." });
+});
+
+// server.js — add anywhere in your routes section
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "ok",
+    time: new Date().toISOString(),
+    mongo: mongoose.connection.readyState === 1,
+  });
 });
 
 // 404 fallback — must come AFTER every route or it'll eat them.
