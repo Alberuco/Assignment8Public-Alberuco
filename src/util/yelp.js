@@ -10,7 +10,8 @@ async function searchBusinesses(term, location, sortBy) {
     });
 
     // Send a fetch request to the Yelp backend search endpoint
-    const res = await fetch(`${SEARCH_PATH}?${params}`);
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}${SEARCH_PATH}?${params}`);
     // Check if the response failed and throw an error if needed
     if (!res.ok) {
         throw new Error(`Yelp request failed (${res.status})`);
