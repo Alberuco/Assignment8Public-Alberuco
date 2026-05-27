@@ -5,9 +5,9 @@ Name: Albert Aranda
 
 ## Live URLs
 
-- **Client:** https://platescout-yourname.vercel.app
-- **Server:** https://platescout-yourname.onrender.com
-- **Server health check:** https://platescout-yourname.onrender.com/api/health
+- **Client:** https://assignment8-public-alberuco.vercel.app/
+- **Server:** https://platescout-albert.onrender.com/
+- **Server health check:** https://platescout-albert.onrender.com/api/health
 
 ## Local setup
 
